@@ -8,13 +8,13 @@ router.post(
   '/signup',
   check('name')
     .isLength({ min: 5 })
-    .withMessage('must be at least 5 chars long'),
+    .withMessage('Name must be at least 5 chars long'),
   check('email').isEmail().withMessage('email is not correct'),
   check('password')
     .isLength({ min: 5 })
-    .withMessage('must be at least 5 chars long')
+    .withMessage('password must be at least 5 chars long')
     .matches(/\d/)
-    .withMessage('must contain a number'),
+    .withMessage('password must contain a number'),
   signup
 );
 
