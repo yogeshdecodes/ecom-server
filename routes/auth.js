@@ -1,7 +1,13 @@
 const User = require('../models/user');
 var express = require('express');
 var router = express.Router();
-const { signup, signin, signout } = require('../controllers/auth');
+const {
+  signup,
+  signin,
+  signout,
+  isSignIn,
+  isAuthenticated,
+} = require('../controllers/auth');
 const { check } = require('express-validator');
 
 router.post(
@@ -26,5 +32,17 @@ router.post(
 );
 
 router.get('/signout', signout);
+
+router.get('/test/:id', isSignIn, (req, res) => {
+  User.findById(req.params.id).exec((err, user) => {
+    if (err || !user) {
+      return res.status(400).json({
+        error: 'No user was found in DB',
+      });
+    }
+    req.profile = user;
+    res.send(req.profile);
+  });
+});
 
 module.exports = router;
