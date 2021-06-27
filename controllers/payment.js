@@ -1,10 +1,10 @@
 const braintree = require('braintree');
 
 const gateway = new braintree.BraintreeGateway({
-  environment: braintree.Environment.Sandbox,
-  merchantId: 'dj45q2dqptr2442z',
-  publicKey: '9ykcqtm6npvnkjn8',
-  privateKey: 'bcc5d908868c0bd706f810af63ca8ce5',
+  environment: process.env.ENVIRONMENT,
+  merchantId: process.env.MERCHANTID,
+  publicKey: process.env.PUBLICKEY,
+  privateKey: process.env.PRIVATEKEY,
 });
 
 exports.getToken = (req, res) => {
